@@ -36,7 +36,7 @@ export default function Navbar() {
         }`}
       >
         <a href="#hero" onClick={e=>{e.preventDefault();go('#hero')}} className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-grad-purple flex items-center justify-center text-[12px] font-black text-white tracking-wider bg-purple-700">VL</div>
+          <img src="/LOGO2.png" alt="VaezLab" className="w-9 h-9 rounded-xl object-contain" />
           <div className="text-[11px] font-bold leading-tight tracking-[2px]">
             <span className="text-purpleL">VAEZ</span><br/>LAB
           </div>
