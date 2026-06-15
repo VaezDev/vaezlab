@@ -4,54 +4,6 @@ import { motion } from 'framer-motion'
 
 const projects = [
   {
-    title: 'Distribuidora López',
-    type: 'Web Corporativa',
-    color: 'from-purple-900/40 to-purple-700/20',
-    accent: '#A855F7',
-    techs: [
-      { name: 'Next.js',      bg: '#000000', text: '#ffffff' },
-      { name: 'Tailwind CSS', bg: '#0EA5E9', text: '#ffffff' },
-      { name: 'Framer Motion',bg: '#BB22FF', text: '#ffffff' },
-      { name: 'Vercel',       bg: '#1A1A1A', text: '#ffffff' },
-    ],
-  },
-  {
-    title: 'Panadería Artesanal',
-    type: 'Landing Page',
-    color: 'from-cyan-900/40 to-cyan-700/20',
-    accent: '#06B6D4',
-    techs: [
-      { name: 'React',        bg: '#20232A', text: '#61DAFB' },
-      { name: 'Tailwind CSS', bg: '#0EA5E9', text: '#ffffff' },
-      { name: 'Vite',         bg: '#BD34FE', text: '#ffffff' },
-      { name: 'Netlify',      bg: '#00AD9F', text: '#ffffff' },
-    ],
-  },
-  {
-    title: 'Fashion Store',
-    type: 'E-Commerce',
-    color: 'from-pink-900/40 to-purple-900/30',
-    accent: '#EC4899',
-    techs: [
-      { name: 'Next.js',      bg: '#000000', text: '#ffffff' },
-      { name: 'Stripe',       bg: '#635BFF', text: '#ffffff' },
-      { name: 'Prisma',       bg: '#2D3748', text: '#ffffff' },
-      { name: 'Tailwind CSS', bg: '#0EA5E9', text: '#ffffff' },
-    ],
-  },
-  {
-    title: 'Diego Ramírez',
-    type: 'Portfolio Personal',
-    color: 'from-indigo-900/40 to-purple-900/30',
-    accent: '#818CF8',
-    techs: [
-      { name: 'Next.js',      bg: '#000000', text: '#ffffff' },
-      { name: 'TypeScript',   bg: '#3178C6', text: '#ffffff' },
-      { name: 'Framer Motion',bg: '#BB22FF', text: '#ffffff' },
-      { name: 'Tailwind CSS', bg: '#0EA5E9', text: '#ffffff' },
-    ],
-  },
-  {
     title: 'Innovare JM',
     type: 'Plataforma Vacacional',
     color: 'from-blue-900/40 to-sky-800/20',
@@ -77,39 +29,68 @@ const projects = [
 ]
 
 function TechDisplay({ project }) {
+  const domain = project.url
+    ? project.url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+    : 'stack tecnológico'
   return (
     <div className="rounded-xl overflow-hidden border border-[#1A1A2E] bg-[#0F0F1A]">
-      {/* Header bar */}
+      {/* Browser bar */}
       <div className="flex items-center gap-2 px-4 py-2.5 bg-[#0C0C15] border-b border-[#1A1A2E]">
         <span className="w-2.5 h-2.5 rounded-full bg-red-500/60"/>
         <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/60"/>
         <span className="w-2.5 h-2.5 rounded-full bg-green-500/60"/>
         <div className="flex-1 mx-3 bg-[#1A1A2E] rounded-full h-5 flex items-center px-3">
-          <span className="text-[10px] text-zinc-600 font-mono">stack tecnológico</span>
+          <span className="text-[10px] text-zinc-500 font-mono truncate">{domain}</span>
         </div>
       </div>
 
-      {/* Tech stack grid */}
-      <div className={`h-40 bg-gradient-to-br ${project.color} p-5 flex flex-col justify-between`}>
-        <p className="text-[10px] font-semibold tracking-[1.5px] uppercase" style={{ color: project.accent }}>
-          Tecnologías utilizadas
-        </p>
-        <div className="flex flex-wrap gap-2 mt-2">
-          {project.techs.map(tech => (
-            <span
-              key={tech.name}
-              className="text-[11px] font-bold px-2.5 py-1 rounded-md tracking-wide"
-              style={{ background: tech.bg, color: tech.text }}
-            >
-              {tech.name}
-            </span>
-          ))}
+      {project.url ? (
+        <>
+          {/* Live website preview */}
+          <div className="h-44 overflow-hidden bg-[#0C0C15] relative">
+            <img
+              src={`https://image.thum.io/get/width/800/crop/600/${project.url}`}
+              alt={`Vista previa de ${project.title}`}
+              loading="lazy"
+              className="w-full h-full object-cover object-top"
+            />
+          </div>
+          {/* Tech chips */}
+          <div className="flex flex-wrap gap-1.5 px-4 py-3 bg-[#0C0C15] border-t border-[#1A1A2E]">
+            {project.techs.map(tech => (
+              <span
+                key={tech.name}
+                className="text-[10px] font-bold px-2 py-0.5 rounded-md tracking-wide"
+                style={{ background: tech.bg, color: tech.text }}
+              >
+                {tech.name}
+              </span>
+            ))}
+          </div>
+        </>
+      ) : (
+        /* Tech stack grid (sin URL) */
+        <div className={`h-40 bg-gradient-to-br ${project.color} p-5 flex flex-col justify-between`}>
+          <p className="text-[10px] font-semibold tracking-[1.5px] uppercase" style={{ color: project.accent }}>
+            Tecnologías utilizadas
+          </p>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {project.techs.map(tech => (
+              <span
+                key={tech.name}
+                className="text-[11px] font-bold px-2.5 py-1 rounded-md tracking-wide"
+                style={{ background: tech.bg, color: tech.text }}
+              >
+                {tech.name}
+              </span>
+            ))}
+          </div>
+          <div className="flex items-center gap-1.5 mt-3">
+            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: project.accent }}/>
+            <span className="text-[10px] text-zinc-500">Optimizado para rendimiento y SEO</span>
+          </div>
         </div>
-        <div className="flex items-center gap-1.5 mt-3">
-          <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: project.accent }}/>
-          <span className="text-[10px] text-zinc-500">Optimizado para rendimiento y SEO</span>
-        </div>
-      </div>
+      )}
     </div>
   )
 }
