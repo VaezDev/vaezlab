@@ -51,6 +51,29 @@ const projects = [
       { name: 'Tailwind CSS', bg: '#0EA5E9', text: '#ffffff' },
     ],
   },
+  {
+    title: 'Innovare JM',
+    type: 'Plataforma Vacacional',
+    color: 'from-blue-900/40 to-sky-800/20',
+    accent: '#38BDF8',
+    url: 'https://www.innovarejm.com/',
+    techs: [
+      { name: 'React',        bg: '#20232A', text: '#61DAFB' },
+      { name: 'Tailwind CSS', bg: '#0EA5E9', text: '#ffffff' },
+    ],
+  },
+  {
+    title: 'Nexo Administración',
+    type: 'Landing Page',
+    color: 'from-yellow-900/40 to-amber-900/20',
+    accent: '#F59E0B',
+    url: 'https://www.nexoadministracionintegral.com/',
+    techs: [
+      { name: 'Next.js',      bg: '#000000', text: '#ffffff' },
+      { name: 'React',        bg: '#20232A', text: '#61DAFB' },
+      { name: 'Tailwind CSS', bg: '#0EA5E9', text: '#ffffff' },
+    ],
+  },
 ]
 
 function TechDisplay({ project }) {
@@ -122,9 +145,20 @@ export default function Portfolio() {
                     <h3 className="font-bold text-[15px]">{p.title}</h3>
                     <span className="text-[11px] text-zinc-500 font-medium tracking-[1px] uppercase">{p.type}</span>
                   </div>
-                  <div className="w-8 h-8 rounded-full border border-[#1A1A2E] flex items-center justify-center text-zinc-600 group-hover:border-purpleL group-hover:text-purpleL transition-all">
-                    →
-                  </div>
+                  {p.url ? (
+                    <a
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-8 h-8 rounded-full border border-[#1A1A2E] flex items-center justify-center text-zinc-600 group-hover:border-purpleL group-hover:text-purpleL transition-all"
+                    >
+                      →
+                    </a>
+                  ) : (
+                    <div className="w-8 h-8 rounded-full border border-[#1A1A2E] flex items-center justify-center text-zinc-600 group-hover:border-purpleL group-hover:text-purpleL transition-all">
+                      →
+                    </div>
+                  )}
                 </div>
               </motion.div>
             </FadeIn>
